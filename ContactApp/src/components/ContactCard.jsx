@@ -9,12 +9,14 @@ import { doc } from "firebase/firestore";
 import modalInfo from "../hooks/modalInfo";
 import AddandUpdateContact from "./AddandUpdateContact";
 import { useState } from "react";
+import { toast } from "react-toastify";
 const ContactCard = ({ person }) => {
   const {isOpen,onClose,onOpen}=modalInfo();
   const deleteContact = async (id) => {
     try {
       const contactref = doc(collection(db,"contacts"),id);
       await deleteDoc(contactref,id);
+      toast.success("Contact deleted")
     } catch (error) {
       console.log(error);
     }

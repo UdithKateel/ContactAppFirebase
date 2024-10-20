@@ -8,6 +8,8 @@ import AddandUpdateContact from "./components/AddandUpdateContact.jsx";
 import Modal from "./components/Modal.jsx";
 import modalInfo from "./hooks/modalInfo.js";
 import ContactCard from "./components/ContactCard.jsx";
+ import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 export default function App() {
   const [contacts, setcontacts] = useState([]);
   const {isOpen,onClose,onOpen}=modalInfo();
@@ -58,6 +60,9 @@ export default function App() {
       </div>
       <AddandUpdateContact isOpen={isOpen} onClose={onClose}  onOpen={onOpen} />
     </div>
+        <ToastContainer
+        position="bottom-center"
+        />
     </>
   );
 }

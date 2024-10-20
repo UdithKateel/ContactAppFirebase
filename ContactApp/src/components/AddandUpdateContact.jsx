@@ -4,11 +4,13 @@ import { Formik,Form, Field } from 'formik'
 import { db } from '../config/firebase'
 import { addDoc, collection, updateDoc } from 'firebase/firestore'
 import { doc } from 'firebase/firestore'
+import { toast } from 'react-toastify'
 const AddandUpdateContact = ({isOpen,onClose,onOpen,isUpdate,contact}) => {
     const addContact=async (contact)=>{
         try {
             const contactref=collection(db,"contacts");
             await addDoc(contactref,contact);
+             toast.success("Contact added");
         } catch (error) {
             console.log(error);
         }
@@ -17,6 +19,7 @@ const AddandUpdateContact = ({isOpen,onClose,onOpen,isUpdate,contact}) => {
         try {
             const contactdoc=doc(db,"contacts",id);
             await updateDoc(contactdoc,contact);
+              toast.success("Contact updated");
         } catch (error) {
             console.log(error);
         }
