@@ -10,6 +10,7 @@ import modalInfo from "./hooks/modalInfo.js";
 import ContactCard from "./components/ContactCard.jsx";
  import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
+import NoContacts from "./components/NoContacts.jsx";
 export default function App() {
   const [contacts, setcontacts] = useState([]);
   const {isOpen,onClose,onOpen}=modalInfo();
@@ -73,11 +74,11 @@ const filterContacts=(e)=>{
         </button>
       </div>
       <div className="m-4 ">
-        {contacts.map((person) => {
+        {  contacts.length<=0?(<NoContacts/>): (contacts.map((person) => {
           return (
            <ContactCard key={person.id} person={person}/>
           );
-        })}
+        }))}
       </div>
       <AddandUpdateContact isOpen={isOpen} onClose={onClose}  onOpen={onOpen} />
     </div>
