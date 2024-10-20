@@ -3,7 +3,7 @@ import { IoMdAddCircleOutline } from "react-icons/io";
 import { FiSearch } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { db } from "./config/firebase.js";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import AddandUpdateContact from "./components/AddandUpdateContact.jsx";
 import Modal from "./components/Modal.jsx";
 import modalInfo from "./hooks/modalInfo.js";
@@ -15,14 +15,20 @@ export default function App() {
     const getcontacts = async () => {
       try {
         const contactsref = collection(db, "contacts");
-        const contactSnapshot = await getDocs(contactsref);
-        const contactList = contactSnapshot.docs.map((doc) => {
+  
+        onSnapshot(contactsref,(snapshot)=>{
+            const contactList = snapshot.docs.map((doc) => {
           return {
             id: doc.id,
             ...doc.data(),
           };
+          
         });
         setcontacts(contactList);
+          return contactList;
+        })
+        
+        
       } catch (error) {
         console.log("error" + error);
       }

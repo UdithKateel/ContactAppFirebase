@@ -1,7 +1,8 @@
 import React from "react";
-import { HiOutlineUserCircle } from "react-icons/hi";
+import { MdModeEdit } from "react-icons/md";
+import {HiOutlineUserCircle}from "react-icons/hi"
 import { FaTrashAlt } from "react-icons/fa";
-import { RiEditCircleLine } from "react-icons/ri";
+
 import { collection, deleteDoc } from "firebase/firestore";
 import { db  } from "../config/firebase";  
 import { doc } from "firebase/firestore"; 
@@ -34,7 +35,7 @@ const ContactCard = ({ person }) => {
         </div>
       </div>
       <div className="flex gap-3 text-2xl ">
-        <RiEditCircleLine className="cursor-pointer" onClick={onOpen} />
+        <MdModeEdit  className="cursor-pointer" onClick={onOpen} />
         <FaTrashAlt onClick={()=>deleteContact(person.id)} className="text-orange cursor-pointer" />
       </div>
     </div>

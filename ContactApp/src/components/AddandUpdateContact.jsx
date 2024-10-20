@@ -54,7 +54,7 @@ const AddandUpdateContact = ({isOpen,onClose,onOpen,isUpdate,contact}) => {
                      <label htmlFor="Phone">Phone</label>
                     <Field name="Phone" className="h-10 border "/>
                    </div>
-                    <button  className="bg-orange  rounded-lg border py-1.5 px-3 text-s self-end">{isUpdate?"Update":"Add"} Contact</button>
+                    <button type='submit'  className="bg-orange  rounded-lg border py-1.5 px-3 text-s self-end">{isUpdate?"Update":"Add"} Contact</button>
                 </Form>
             
             </Formik>
