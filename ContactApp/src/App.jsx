@@ -37,13 +37,34 @@ export default function App() {
     };
     getcontacts();
   }, []);
+
+const filterContacts=(e)=>{
+  const value=e.target.value;
+  const contactsref = collection(db, "contacts");
+  
+        onSnapshot(contactsref,(snapshot)=>{
+            const contactList = snapshot.docs.map((doc) => {
+          return {
+            id: doc.id,
+            ...doc.data(),
+          };
+          
+        });
+        const fileteredContacts=contactList.filter((contact)=>
+          contact.Name.toLowerCase().includes(value.toLowerCase())
+        )
+        setcontacts(fileteredContacts);
+          return fileteredContacts;
+        })
+}
+
   return (
     <>
     <div className="max-w-[360px] mx-auto">
       <Navbar />
       <div className="flex m-4 gap-3 p-3 justify-between  relative items-center">
         <FiSearch className="text-2xl absolute text-white ml-2" />
-        <input
+        <input onChange={filterContacts}
           type="text"
           className=" text-white pl-10  bg-transparent rounded-md border border-white h-10 flex-grow"
         />
