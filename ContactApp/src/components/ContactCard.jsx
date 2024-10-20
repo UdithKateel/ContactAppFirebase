@@ -5,7 +5,11 @@ import { RiEditCircleLine } from "react-icons/ri";
 import { collection, deleteDoc } from "firebase/firestore";
 import { db  } from "../config/firebase";  
 import { doc } from "firebase/firestore"; 
+import modalInfo from "../hooks/modalInfo";
+import AddandUpdateContact from "./AddandUpdateContact";
+import { useState } from "react";
 const ContactCard = ({ person }) => {
+  const {isOpen,onClose,onOpen}=modalInfo();
   const deleteContact = async (id) => {
     try {
       const contactref = doc(collection(db,"contacts"),id);
@@ -15,6 +19,7 @@ const ContactCard = ({ person }) => {
     }
   };
   return (
+    <>
     <div
       key={person.id}
       className="bg-yellow flex justify-between items-center rounded-lg p-2 m-2"
@@ -29,10 +34,12 @@ const ContactCard = ({ person }) => {
         </div>
       </div>
       <div className="flex gap-3 text-2xl ">
-        <RiEditCircleLine />
-        <FaTrashAlt onClick={()=>deleteContact(person.id)} className="text-orange" />
+        <RiEditCircleLine className="cursor-pointer" onClick={onOpen} />
+        <FaTrashAlt onClick={()=>deleteContact(person.id)} className="text-orange cursor-pointer" />
       </div>
     </div>
+    <AddandUpdateContact contact={person} isUpdate isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
+    </>
   );
 };
 
